@@ -1,4 +1,4 @@
-package com.bot.smartqueue.tentant;
+package com.bot.smartqueue.tenant;
 
 import com.bot.smartqueue.offering.Offering;
 import com.bot.smartqueue.user.User;
@@ -16,13 +16,13 @@ import static jakarta.persistence.CascadeType.*;
 @Getter
 @Setter
 @Entity
-@Table(name = "tentant")
+@Table(name = "tenant")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Tentant {
+public class Tenant {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID tentantId;
+    private UUID tenantId;
 
     private String name;
 

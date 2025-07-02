@@ -3,10 +3,8 @@ package com.bot.smartqueue.visit;
 import com.bot.smartqueue.queue.QueueEntry;
 import com.bot.smartqueue.user.User;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -15,25 +13,26 @@ import java.util.UUID;
 @Setter
 @Entity
 @Table(name = "user")
+@FieldDefaults(level = AccessLevel.PRIVATE)
 @AllArgsConstructor
 @NoArgsConstructor
 public class Visit {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID visitId;
+    UUID visitId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private QueueEntry visitData;
+    QueueEntry visitData;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User client;
+    @JoinColumn(name = "user_userId")
+    User client;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User operator;
+    @JoinColumn(name = "user_userId")
+    User operator;
 
-    private LocalDateTime startedAt;
+    LocalDateTime startedAt;
 
-    private LocalDateTime finishedAt;
+    LocalDateTime finishedAt;
 }

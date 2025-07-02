@@ -2,10 +2,8 @@ package com.bot.smartqueue.offering;
 
 import com.bot.smartqueue.offering.enums.Type;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 import java.util.UUID;
 
@@ -13,6 +11,7 @@ import java.util.UUID;
 @Setter
 @Entity
 @Table(name = "offering")
+@FieldDefaults(level = AccessLevel.PRIVATE)
 @AllArgsConstructor
 @NoArgsConstructor
 public class Offering {
@@ -20,7 +19,7 @@ public class Offering {
     @GeneratedValue(strategy = GenerationType.UUID)
     UUID offeringId;
 
-    UUID tentantId;
+    UUID tenantId;
 
     String operationName;
 

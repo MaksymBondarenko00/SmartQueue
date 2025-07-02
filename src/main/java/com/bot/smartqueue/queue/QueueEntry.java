@@ -3,10 +3,8 @@ package com.bot.smartqueue.queue;
 import com.bot.smartqueue.offering.Offering;
 import com.bot.smartqueue.queue.enums.Status;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -15,21 +13,22 @@ import java.util.UUID;
 @Setter
 @Entity
 @Table(name = "user")
+@FieldDefaults(level = AccessLevel.PRIVATE)
 @AllArgsConstructor
 @NoArgsConstructor
 public class QueueEntry {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID queueEntryId;
+    UUID queueEntryId;
 
-    private UUID tentantId;
+    UUID tenantId;
 
-    private String queueNumber;
+    String queueNumber;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private Offering offering;
+    Offering offering;
 
-    private Status status;
+    Status status;
 
-    private LocalDateTime createdAt;
+    LocalDateTime createdAt;
 }

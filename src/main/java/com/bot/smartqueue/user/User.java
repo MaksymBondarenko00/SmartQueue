@@ -3,12 +3,9 @@ package com.bot.smartqueue.user;
 import com.bot.smartqueue.offering.Offering;
 import com.bot.smartqueue.user.enums.Role;
 import com.bot.smartqueue.visit.Visit;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -21,33 +18,34 @@ import static jakarta.persistence.CascadeType.*;
 @Setter
 @Entity
 @Table(name = "user")
+@FieldDefaults(level = AccessLevel.PRIVATE)
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID userId;
+    UUID userId;
 
-    private String fullName;
+    String fullName;
 
-    private String phone;
+    String phone;
 
-    private String email;
+    String email;
 
     @Enumerated(EnumType.STRING)
-    private Role role;
+    Role role;
 
-    private LocalDateTime createdAt;
-
-    @OneToMany(
-            cascade = {MERGE, PERSIST, REFRESH},
-            fetch = FetchType.LAZY
-    )
-    private Set<Visit> visits;
+    LocalDateTime createdAt;
 
     @OneToMany(
             cascade = {MERGE, PERSIST, REFRESH},
             fetch = FetchType.LAZY
     )
-    private List<Offering> recivedOfferings;
+    Set<Visit> visits;
+
+    @OneToMany(
+            cascade = {MERGE, PERSIST, REFRESH},
+            fetch = FetchType.LAZY
+    )
+    List<Offering> receivedOfferings;
 }
